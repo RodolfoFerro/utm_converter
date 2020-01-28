@@ -18,7 +18,10 @@ def parser() -> dict:
 	ap = argparse.ArgumentParser()
 	ap.add_argument("-f", "--filename", type=str,
 					default="utm_format.geojson",
-					help="Path to geojson file to be conveerted.")
+					help="Path to geojson file to be converted.")
+	ap.add_argument("-o", "--output", type=str,
+					default="utm_format_converted.geojson",
+					help="Name of the geojson output file after conversion.")
 	args = vars(ap.parse_args())
 
 	return args
@@ -113,6 +116,7 @@ if __name__ == "__main__":
 	# Read parameters from console:
 	args = parser()
 	filename = args['filename']
+	output_file = args['filename']
 
 	# Load geojson object:
 	geojson_object = read_geojson(filename)
@@ -121,5 +125,5 @@ if __name__ == "__main__":
 	utm_to_latlong(geojson_object)
 
 	# Export converted object:
-	save_geojson(geojson_object, 'centroides_manzanas_converted')	
+	save_geojson(geojson_object, output_file)	
 	
